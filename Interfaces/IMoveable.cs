@@ -4,7 +4,7 @@ using System.Text;
 
 namespace topDownShooterProject.Classes
 {
-    public abstract class GameObject
+    interface IMoveable
     {
 
     }

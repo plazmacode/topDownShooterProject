@@ -4,8 +4,7 @@ using System.Text;
 
 namespace topDownShooterProject.Classes
 {
-    public abstract class GameObject
+    class HealthPickup : Pickup
     {
-
     }
 }
