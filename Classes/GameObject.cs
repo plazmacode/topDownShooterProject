@@ -6,6 +6,6 @@ namespace topDownShooterProject.Classes
 {
     public abstract class GameObject
     {
-
+        int health = 10;
     }
 }
