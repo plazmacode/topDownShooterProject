@@ -99,5 +99,15 @@ namespace topDownShooterProject.Classes
             _spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
             _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
         }
+
+        public void instantiate(GameObject gameobject)
+        {
+
+        }
+
+        public void Destroy(GameObject gameobject)
+        {
+
+        }
     }
 }
