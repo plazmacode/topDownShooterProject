@@ -44,6 +44,8 @@ namespace topDownShooterProject.Classes
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            collisionTexture = Content.Load<Texture2D>("CollisionTexture");
+
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
