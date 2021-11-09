@@ -1,13 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
-namespace topDownShooterProject
+namespace topDownShooterProject.Classes
 {
     public class GameWorld : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private List<GameObject> gameObjects = new List<GameObject>();
 
         public GameWorld()
         {
@@ -19,7 +22,8 @@ namespace topDownShooterProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            Player player = new Player();
+            gameObjects.Add(player);
             base.Initialize();
         }
 
@@ -28,6 +32,11 @@ namespace topDownShooterProject
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            foreach (GameObject obj in gameObjects)
+            {
+                obj.LoadContent(Content);
+            }
         }
 
         protected override void Update(GameTime gameTime)
@@ -37,6 +46,12 @@ namespace topDownShooterProject
 
             // TODO: Add your update logic here
 
+
+            foreach (GameObject obj in gameObjects)
+            {
+                obj.Update(gameTime);
+            }
+
             base.Update(gameTime);
         }
 
@@ -45,6 +60,17 @@ namespace topDownShooterProject
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            _spriteBatch.Begin();
+
+            foreach (GameObject obj in gameObjects)
+            {
+                obj.Draw(_spriteBatch);
+
+            }
+
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
