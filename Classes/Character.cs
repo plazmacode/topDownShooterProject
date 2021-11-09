@@ -6,7 +6,7 @@ using System.Text;
 
 namespace topDownShooterProject.Classes
 {
-    class Character : GameObject
+    class Character : GameObject, IMoveable
     {
         public override void LoadContent(ContentManager content)
         {
@@ -15,7 +15,10 @@ namespace topDownShooterProject.Classes
 
         public override void OnCollision(GameObject other)
         {
-
+            if (other is Obstacle)
+            {
+                position -= velocity * speed * (float)0.05;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -23,10 +26,10 @@ namespace topDownShooterProject.Classes
 
         }
 
-        protected void Move(GameTime gameTime)
+        public void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+            
             position += ((velocity * speed) * deltaTime);
         }
     }

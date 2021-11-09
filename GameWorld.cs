@@ -35,8 +35,11 @@ namespace topDownShooterProject.Classes
             gameObjects = new List<GameObject>();
             newGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
+
             Player player = new Player();
             gameObjects.Add(player);
+            gameObjects.Add(new Obstacle());
+
             base.Initialize();
         }
 
@@ -57,6 +60,9 @@ namespace topDownShooterProject.Classes
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            AddObjects();
+            RemoveObjects();
+
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Update(gameTime);
@@ -67,6 +73,22 @@ namespace topDownShooterProject.Classes
             }
 
             base.Update(gameTime);
+        }
+
+        public void AddObjects()
+        {
+            foreach (GameObject gameObject in newGameObjects)
+            {
+                gameObjects.Add(gameObject);
+            }
+        }
+
+        public void RemoveObjects()
+        {
+            foreach (GameObject gameObject in removeGameObjects)
+            {
+                gameObjects.Remove(gameObject);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -102,14 +124,14 @@ namespace topDownShooterProject.Classes
             _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
         }
 
-        public void instantiate(GameObject gameobject)
+        public static void instantiate(GameObject gameObject)
         {
-
+            newGameObjects.Add(gameObject);
         }
 
-        public void Destroy(GameObject gameobject)
+        public static void Destroy(GameObject gameobject)
         {
-
+            removeGameObjects.Add(gameobject);
         }
     }
 }
