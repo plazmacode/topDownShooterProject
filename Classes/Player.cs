@@ -4,12 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace topDownShooterProject.Classes
 {
     class Player : Character
     {
+
+        Vector2 origin= new Vector2(95,120); 
+        float rotation;
+
+
         public Player()
         {
             speed = 1000;
@@ -26,9 +32,17 @@ namespace topDownShooterProject.Classes
 
         public override void Update(GameTime gameTime)
         {
+            MouseState mouseState = Mouse.GetState();
             Handleinput();
+            Look(mouseState);
             Move(gameTime);
 
+        }
+
+        public override void Draw(SpriteBatch spriteBacth)
+        {
+            spriteBacth.Draw(sprite, position, null, Color.White, rotation + 3.14f, origin , 0.5F, SpriteEffects.None, 0);
+            //spriteBacth.Draw(sprite, position, null, Color.White, rotation, Vector2.Zero, 1.0F, SpriteEffects.None, 0);
         }
 
         private void Handleinput()
@@ -58,6 +72,20 @@ namespace topDownShooterProject.Classes
             {
                 velocity.Normalize();
             }
+        }
+
+        /// <summary>
+        /// Finder mussen og pejer player spriten imod den
+        /// </summary>
+        /// <param name="mouseState"></param>
+        private void Look(MouseState mouseState)
+        {
+
+            Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
+            Vector2 Dpos = position - mousePosition;
+
+            rotation = (float)Math.Atan2(Dpos.Y, Dpos.X);
+
         }
     }
 }
