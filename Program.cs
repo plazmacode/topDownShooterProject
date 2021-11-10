@@ -7,7 +7,7 @@ namespace topDownShooterProject
         [STAThread]
         static void Main()
         {
-            using (var game = new GameWorld())
+            using (var game = new Classes.GameWorld())
                 game.Run();
         }
     }
