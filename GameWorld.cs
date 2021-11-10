@@ -9,6 +9,7 @@ namespace topDownShooterProject.Classes
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private SpriteFont text;
 
         private List<GameObject> gameObjects = new List<GameObject>();
         private static List<GameObject> newGameObjects = new List<GameObject>();
@@ -17,12 +18,14 @@ namespace topDownShooterProject.Classes
         private Texture2D collisionTexture;
 
         private static Vector2 screenSize;
+
         private static Vector2 playerPosition;
+
         public static Vector2 ScreenSize { get => screenSize; set => screenSize = value; }
         public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
 
         Player player = new Player();
-
+        
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -41,13 +44,12 @@ namespace topDownShooterProject.Classes
             removeGameObjects = new List<GameObject>();
 
             gameObjects.Add(player);
-
             gameObjects.Add(new Obstacle());
-            for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
+            for (int i = 0; i < 3; i++) //Spawns 5 ammoPickups
             {
                 gameObjects.Add(new AmmoPickup());
             }
-            for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
+            for (int i = 0; i < 3; i++) //Spawns 5 ammoPickups
             {
                 gameObjects.Add(new HealthPickup());
             }
@@ -60,6 +62,8 @@ namespace topDownShooterProject.Classes
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
+
+            text = Content.Load<SpriteFont>("text");
 
             foreach (GameObject gameObject in gameObjects)
             {
@@ -111,6 +115,12 @@ namespace topDownShooterProject.Classes
 
             _spriteBatch.Begin();
 
+            //UI
+            _spriteBatch.DrawString(text, "Heatlh: " + Player.Health.ToString(), new Vector2(0, 50), Color.Red);
+            _spriteBatch.DrawString(text, "Ammo: " + Player.Ammo.ToString(), new Vector2(0, 80), Color.White);
+
+
+            //GameObjects
             foreach (GameObject obj in gameObjects)
             {
                 obj.Draw(_spriteBatch);
