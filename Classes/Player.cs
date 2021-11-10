@@ -23,13 +23,10 @@ namespace topDownShooterProject.Classes
             sprite = content.Load<Texture2D>("survivor-idle_shotgun_0");
         }
 
-
-
         public override void Update(GameTime gameTime)
         {
             Handleinput();
             Move(gameTime);
-
         }
 
         private void Handleinput()

@@ -17,8 +17,11 @@ namespace topDownShooterProject.Classes
         private Texture2D collisionTexture;
 
         private static Vector2 screenSize;
-
+        private static Vector2 playerPosition;
         public static Vector2 ScreenSize { get => screenSize; set => screenSize = value; }
+        public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
+
+        Player player = new Player();
 
         public GameWorld()
         {
@@ -36,12 +39,16 @@ namespace topDownShooterProject.Classes
             newGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
 
-            Player player = new Player();
             gameObjects.Add(player);
+
             gameObjects.Add(new Obstacle());
             for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
             {
                 gameObjects.Add(new AmmoPickup());
+            }
+            for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
+            {
+                gameObjects.Add(new HealthPickup());
             }
 
             base.Initialize();
@@ -63,6 +70,8 @@ namespace topDownShooterProject.Classes
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            playerPosition = player.Position;
 
             AddObjects();
             RemoveObjects();

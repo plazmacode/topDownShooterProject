@@ -29,6 +29,11 @@ namespace topDownShooterProject.Classes
                 Player.Ammo += ammoAmount;
                 Respawn();
             }
+
+            if (other is Obstacle)
+            {
+                Respawn();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -45,6 +50,5 @@ namespace topDownShooterProject.Classes
 
             position = new Vector2(positionX, positionY);
         }
-
     }
 }

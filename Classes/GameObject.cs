@@ -9,7 +9,7 @@ namespace topDownShooterProject.Classes
 {
     public abstract class GameObject
     {
-        protected Vector2 position;
+        private Vector2 position;
         protected Texture2D sprite;
         protected Texture2D[] sprites;
         protected float fps;
@@ -24,7 +24,7 @@ namespace topDownShooterProject.Classes
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, Color.White);
+            spriteBatch.Draw(sprite, Position, Color.White);
         }
 
         public abstract void OnCollision(GameObject other);
@@ -38,8 +38,10 @@ namespace topDownShooterProject.Classes
         }
         public virtual Rectangle CollisionBox
         {
-            get { return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height); }
+            get { return new Rectangle((int)Position.X, (int)Position.Y, sprite.Width, sprite.Height); }
         }
+
+        public Vector2 Position { get => position; set => position = value; }
 
         protected void Animate(GameTime gameTime)
         {
@@ -56,4 +58,5 @@ namespace topDownShooterProject.Classes
             }
         }
     }
+
 }

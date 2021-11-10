@@ -9,11 +9,12 @@ namespace topDownShooterProject.Classes
     class Character : GameObject, IMoveable
     {
         protected Vector2 initialPosition; //Get position of character, before it has moved
-        protected int health;
-        protected Weapon weapon;
+        protected static int health;
         protected static int ammo;
+        protected Weapon weapon;
 
         public static int Ammo { get => ammo; set => ammo = value; }
+        public static int Health { get => health; set => health = value; }
 
         public override void LoadContent(ContentManager content)
         {
