@@ -41,6 +41,7 @@ namespace topDownShooterProject.Classes
             removeGameObjects = new List<GameObject>();
 
             gameObjects.Add(player);
+            gameObjects.Add(new Enemy());
 
             gameObjects.Add(new Obstacle());
             for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
