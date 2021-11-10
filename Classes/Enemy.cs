@@ -6,5 +6,6 @@ namespace topDownShooterProject.Classes
 {
     class Enemy : Character
     {
+
     }
 }
