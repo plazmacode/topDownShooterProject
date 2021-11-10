@@ -9,7 +9,7 @@ namespace topDownShooterProject.Classes
 {
     public abstract class GameObject
     {
-        private Vector2 position;
+        protected Vector2 position;
         protected Texture2D sprite;
         protected Texture2D[] sprites;
         protected float fps;

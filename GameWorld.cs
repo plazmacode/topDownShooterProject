@@ -31,6 +31,7 @@ namespace topDownShooterProject.Classes
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             ScreenSize = new Vector2(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+            player.Position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
         }
 
         protected override void Initialize()
