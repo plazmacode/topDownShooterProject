@@ -9,9 +9,11 @@ namespace topDownShooterProject.Classes
 {
     class Obstacle : GameObject
     {
-        public Obstacle()
+        public Obstacle(Texture2D sprite, int X, int Y)
         {
-
+            this.sprite = sprite;
+            this.position.X = X;
+            this.position.Y = Y;
         }
 
         public Obstacle(int X, int Y)
