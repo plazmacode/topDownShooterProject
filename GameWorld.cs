@@ -21,7 +21,7 @@ namespace topDownShooterProject.Classes
         public static Vector2 ScreenSize { get => screenSize; set => screenSize = value; }
         public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
 
-        Player player = new Player();
+        public static Player player = new Player();
 
         public GameWorld()
         {
