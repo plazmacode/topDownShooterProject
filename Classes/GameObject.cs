@@ -38,7 +38,7 @@ namespace topDownShooterProject.Classes
         }
         public virtual Rectangle CollisionBox
         {
-            get { return new Rectangle((int)Position.X, (int)Position.Y, sprite.Width, sprite.Height); }
+            get { return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height); }
         }
 
         public Vector2 Position { get => position; set => position = value; }
