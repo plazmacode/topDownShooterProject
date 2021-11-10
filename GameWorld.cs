@@ -12,6 +12,7 @@ namespace topDownShooterProject.Classes
         private SpriteFont text;
 
         private List<GameObject> gameObjects = new List<GameObject>();
+        private List<GameObject> obstacles = new List<GameObject>(); //Level design
         private static List<GameObject> newGameObjects = new List<GameObject>();
         private static List<GameObject> removeGameObjects = new List<GameObject>();
 
@@ -24,7 +25,7 @@ namespace topDownShooterProject.Classes
         public static Vector2 ScreenSize { get => screenSize; set => screenSize = value; }
         public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
 
-        Player player = new Player();
+        public static Player player = new Player();
         
         public GameWorld()
         {
@@ -42,6 +43,7 @@ namespace topDownShooterProject.Classes
             gameObjects = new List<GameObject>();
             newGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
+            obstacles = new List<GameObject>();
 
             gameObjects.Add(player);
             gameObjects.Add(new Obstacle());
@@ -116,8 +118,8 @@ namespace topDownShooterProject.Classes
             _spriteBatch.Begin();
 
             //UI
-            _spriteBatch.DrawString(text, "Heatlh: " + Player.Health.ToString(), new Vector2(0, 50), Color.Red);
-            _spriteBatch.DrawString(text, "Ammo: " + Player.Ammo.ToString(), new Vector2(0, 80), Color.White);
+            _spriteBatch.DrawString(text, "Heatlh: " + player.Health.ToString(), new Vector2(0, 50), Color.Red);
+            _spriteBatch.DrawString(text, "Ammo: " + player.Ammo.ToString(), new Vector2(0, 80), Color.White);
 
 
             //GameObjects

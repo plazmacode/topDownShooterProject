@@ -26,7 +26,7 @@ namespace topDownShooterProject.Classes
         {
             if (other is Player)
             {
-                Player.Ammo += ammoAmount;
+                GameWorld.player.Ammo += ammoAmount;
                 Respawn();
             }
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace topDownShooterProject.Classes
 {
-    class Weapon : GameObject
+    public class Weapon : GameObject
     {
         public override void LoadContent(ContentManager content)
         {

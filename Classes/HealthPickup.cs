@@ -25,7 +25,7 @@ namespace topDownShooterProject.Classes
         {
             if (other is Player)
             {
-                Player.Health += healAmount;
+                GameWorld.player.Health += healAmount;
                 Respawn();
             }
 

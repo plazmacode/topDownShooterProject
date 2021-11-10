@@ -9,7 +9,7 @@ using System.Text;
 
 namespace topDownShooterProject.Classes
 {
-    class Player : Character
+    public class Player : Character
     {
 
         Vector2 origin= new Vector2(95,120); 
