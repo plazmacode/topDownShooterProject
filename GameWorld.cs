@@ -39,6 +39,10 @@ namespace topDownShooterProject.Classes
             Player player = new Player();
             gameObjects.Add(player);
             gameObjects.Add(new Obstacle());
+            for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
+            {
+                gameObjects.Add(new AmmoPickup());
+            }
 
             base.Initialize();
         }

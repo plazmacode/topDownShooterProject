@@ -9,6 +9,17 @@ namespace topDownShooterProject.Classes
 {
     class Obstacle : GameObject
     {
+        public Obstacle()
+        {
+
+        }
+
+        public Obstacle(int X, int Y)
+        {
+            this.position.X = X;
+            this.position.Y = Y;
+        }
+
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("obstacle");

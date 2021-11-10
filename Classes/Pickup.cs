@@ -6,5 +6,6 @@ namespace topDownShooterProject.Classes
 {
     public abstract class Pickup : GameObject
     {
+        protected Random random;
     }
 }
