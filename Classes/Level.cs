@@ -53,7 +53,7 @@ namespace topDownShooterProject.Classes
 
         private static void level0()
         {
-            GameWorld.instantiate(new Obstacle(crateSprite, 100, 100));
+            GameWorld.instantiate(new Obstacle(crateSprite, 100, 100, true));
             for (int i = 0; i < 18; i++)
             {
                 GameWorld.instantiate(new Obstacle(obstacleSprite, 0, 50*i));

@@ -17,6 +17,7 @@ namespace topDownShooterProject.Classes
 
         private Texture2D bulletSprite;
 
+        public float Rotation { get => rotation; set => rotation = value; }
 
         public Player()
         {
@@ -42,9 +43,9 @@ namespace topDownShooterProject.Classes
             Move(gameTime);
         }
 
-        public override void Draw(SpriteBatch spriteBacth)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBacth.Draw(sprite, position, null, Color.White, rotation + 3.14f, origin , 1F, SpriteEffects.None, 0.2f);
+            spriteBatch.Draw(sprite, position, null, Color.White, rotation + 3.14f, origin , 1F, SpriteEffects.None, 0.2f);
             //spriteBacth.Draw(sprite, position, null, Color.White, rotation, Vector2.Zero, 1.0F, SpriteEffects.None, 0);
         }
 

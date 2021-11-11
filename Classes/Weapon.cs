@@ -11,7 +11,7 @@ namespace topDownShooterProject.Classes
 {
     public class Weapon : GameObject
     {
-
+        float rotation;
         MouseState mouseState = Mouse.GetState();
 
 
@@ -19,9 +19,10 @@ namespace topDownShooterProject.Classes
         {
             this.sprite = sprite;
             this.position = position;
-            this.speed = 800;
-            this.velocity = new Vector2(mouseState.X - GameWorld.ScreenSize.X, mouseState.Y - GameWorld.ScreenSize.Y);
+            this.speed = 3000;
+            this.velocity = -Vector2.Subtract(GameWorld.player.Position, new Vector2(mouseState.X, mouseState.Y));
             velocity.Normalize();
+            this.rotation = GameWorld.player.Rotation;
         }
 
 
@@ -38,11 +39,29 @@ namespace topDownShooterProject.Classes
             {
                 GameWorld.Destroy(this);
             }
+            if (position.Y > GameWorld.ScreenSize.Y)
+            {
+                GameWorld.Destroy(this);
+            }
+            if (position.X < 0)
+            {
+                GameWorld.Destroy(this);
+            }
+            if (position.X > GameWorld.ScreenSize.X)
+            {
+                GameWorld.Destroy(this);
+            }
         }
-
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, null, Color.White, rotation - 1.57f, new Vector2(2,2), 1F, SpriteEffects.None, 0.2f);
+        }
 
         public override void OnCollision(GameObject other)
         {
+            if (other is Obstacle)
+            {
+            }
         }
 
         public void Move(GameTime gameTime)
