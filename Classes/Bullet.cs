@@ -4,7 +4,5 @@ using System.Text;
 
 namespace topDownShooterProject.Classes
 {
-    class Bullet : Weapon
-    {
-    }
+
 }

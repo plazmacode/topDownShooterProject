@@ -15,6 +15,8 @@ namespace topDownShooterProject.Classes
         Vector2 origin= new Vector2(14,20); 
         float rotation;
 
+        private Texture2D bulletSprite;
+
 
         public Player()
         {
@@ -28,6 +30,8 @@ namespace topDownShooterProject.Classes
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("survivor-idle_shotgun_0");
+
+            bulletSprite = content.Load<Texture2D>("bullet");
         }
 
         public override void Update(GameTime gameTime)
@@ -70,6 +74,11 @@ namespace topDownShooterProject.Classes
             if (velocity != Vector2.Zero)
             {
                 velocity.Normalize();
+            }
+
+            if (keyState.IsKeyDown(Keys.Space))
+            {
+                GameWorld.instantiate(new Weapon(bulletSprite, new Vector2(position.X, position.Y)));
             }
         }
 
