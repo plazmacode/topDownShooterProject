@@ -41,14 +41,17 @@ namespace topDownShooterProject.Classes
             newGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
 
+            Level.LoadContent(Content);
+            Level.CreateLevel(0);
+
             gameObjects.Add(player);
             gameObjects.Add(new Enemy());
 
-            for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
+            for (int i = 0; i < 3; i++) //Spawns 5 ammoPickups
             {
                 gameObjects.Add(new AmmoPickup());
             }
-            for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
+            for (int i = 0; i < 3; i++) //Spawns 5 ammoPickups
             {
                 gameObjects.Add(new HealthPickup());
             }
@@ -60,6 +63,7 @@ namespace topDownShooterProject.Classes
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Level.LoadContent(Content);
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
             text = Content.Load<SpriteFont>("text");
 
@@ -97,6 +101,7 @@ namespace topDownShooterProject.Classes
             {
                 gameObjects.Add(gameObject);
             }
+            newGameObjects.Clear();
         }
 
         public void RemoveObjects()
@@ -105,6 +110,7 @@ namespace topDownShooterProject.Classes
             {
                 gameObjects.Remove(gameObject);
             }
+            removeGameObjects.Clear();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -112,11 +118,6 @@ namespace topDownShooterProject.Classes
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-
-            //UI
-            _spriteBatch.DrawString(text, "Heatlh: " + player.Health.ToString(), new Vector2(0, 50), Color.Red);
-            _spriteBatch.DrawString(text, "Ammo: " + player.Ammo.ToString(), new Vector2(0, 80), Color.White);
-
 
             //GameObjects
             foreach (GameObject obj in gameObjects)
@@ -126,6 +127,10 @@ namespace topDownShooterProject.Classes
                 DrawCollisionBox(obj);
 #endif
             }
+
+            //UI
+            _spriteBatch.DrawString(text, "Heatlh: " + player.Health.ToString(), new Vector2(0, 50), Color.Red);
+            _spriteBatch.DrawString(text, "Ammo: " + player.Ammo.ToString(), new Vector2(0, 80), Color.White);
 
             _spriteBatch.End();
 
