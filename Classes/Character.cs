@@ -25,7 +25,7 @@ namespace topDownShooterProject.Classes
         {
             //TODO: Add more precise collision detection 
 
-            if (other is Obstacle && !(this is Enemy)) //collision code 2.0
+            if (other is Obstacle) //collision code 2.0
             {
                 this.position = initialPosition;
             }

@@ -23,6 +23,7 @@ namespace topDownShooterProject.Classes
      
         public override void Update(GameTime gameTime)
         {
+            initialPosition = this.position;
             targetPosition = GameWorld.PlayerPosition;
 
             if (targetPosition.X > Position.X )
