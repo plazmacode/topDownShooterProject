@@ -24,6 +24,7 @@ namespace topDownShooterProject.Classes
         }
         private static void level0()
         {
+            //GameWorld.instantiate(new BackgroundObject());
             for (int i = 0; i < 18; i++)
             {
                 GameWorld.instantiate(new Obstacle(obstacleSprite, 0, 50*i));

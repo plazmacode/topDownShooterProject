@@ -139,7 +139,7 @@ namespace topDownShooterProject.Classes
         }
         private void DrawCollisionBox(GameObject gameObject)
         {
-            Rectangle collisionBox = gameObject.CollisionBox;
+            Rectangle collisionBox = gameObject.CollisionBox();
             Rectangle topLine = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
             Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
             Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);

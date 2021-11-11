@@ -49,6 +49,18 @@
 /processorParam:TextureFormat=Color
 /build:collisionTexture.png
 
+#begin crate.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:crate.png
+
 #begin health.png
 /importer:TextureImporter
 /processor:TextureProcessor

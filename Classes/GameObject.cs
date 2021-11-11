@@ -31,14 +31,21 @@ namespace topDownShooterProject.Classes
 
         public void CheckCollision(GameObject other)
         {
-            if (CollisionBox.Intersects(other.CollisionBox))
+            if (CollisionBox().Intersects(other.CollisionBox()))
             {
                 OnCollision(other);
             }
         }
-        public virtual Rectangle CollisionBox
+        public virtual Rectangle CollisionBox()
         {
-            get { return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height); }
+            if(this is Player)
+            {
+                return new Rectangle((int)position.X-25, (int)position.Y-25, 50, 50);
+            }
+            else
+            { 
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+            }
         }
 
         public Vector2 Position { get => position; set => position = value; }
