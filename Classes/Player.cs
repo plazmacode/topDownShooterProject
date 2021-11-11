@@ -12,7 +12,7 @@ namespace topDownShooterProject.Classes
     public class Player : Character
     {
 
-        Vector2 origin= new Vector2(95,120); 
+        Vector2 origin= new Vector2(14,20); 
         float rotation;
 
 
@@ -40,7 +40,7 @@ namespace topDownShooterProject.Classes
 
         public override void Draw(SpriteBatch spriteBacth)
         {
-            spriteBacth.Draw(sprite, position, null, Color.White, rotation + 3.14f, origin , 0.5F, SpriteEffects.None, 0);
+            spriteBacth.Draw(sprite, position, null, Color.White, rotation + 3.14f, origin , 1F, SpriteEffects.None, 0);
             //spriteBacth.Draw(sprite, position, null, Color.White, rotation, Vector2.Zero, 1.0F, SpriteEffects.None, 0);
         }
 
