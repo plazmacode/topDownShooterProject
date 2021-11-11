@@ -40,7 +40,7 @@ namespace topDownShooterProject.Classes
 
         public override void Draw(SpriteBatch spriteBacth)
         {
-            spriteBacth.Draw(sprite, position, null, Color.White, rotation + 3.14f, origin , 1F, SpriteEffects.None, 0);
+            spriteBacth.Draw(sprite, position, null, Color.White, rotation + 3.14f, origin , 1F, SpriteEffects.None, 0.2f);
             //spriteBacth.Draw(sprite, position, null, Color.White, rotation, Vector2.Zero, 1.0F, SpriteEffects.None, 0);
         }
 
@@ -85,6 +85,35 @@ namespace topDownShooterProject.Classes
 
             rotation = (float)Math.Atan2(Dpos.Y, Dpos.X);
 
+        }
+
+        public void Respawn(string place)
+        {
+            if (place == "center")
+            {
+                position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
+
+            }
+            if (place == "left")
+            {
+                position = new Vector2(0, position.Y);
+
+            }
+            if (place == "right")
+            {
+                position = new Vector2(GameWorld.ScreenSize.X, position.Y);
+
+            }
+            if (place == "top")
+            {
+                position = new Vector2(Position.X, 0);
+
+            }
+            if (place == "bottom")
+            {
+                position = new Vector2(Position.X, GameWorld.ScreenSize.Y);
+
+            }
         }
     }
 }

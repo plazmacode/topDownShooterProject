@@ -24,7 +24,7 @@ namespace topDownShooterProject.Classes
 
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("obstacle");
+
         }
 
         public override void OnCollision(GameObject other)
@@ -35,6 +35,10 @@ namespace topDownShooterProject.Classes
         public override void Update(GameTime gameTime)
         {
             
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, Vector2.Zero, 1F, SpriteEffects.None, 0.2f);
         }
     }
 }

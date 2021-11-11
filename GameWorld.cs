@@ -11,7 +11,7 @@ namespace topDownShooterProject.Classes
         private SpriteBatch _spriteBatch;
         private SpriteFont text;
 
-        private List<GameObject> gameObjects = new List<GameObject>();
+        public static List<GameObject> gameObjects = new List<GameObject>();
         private static List<GameObject> newGameObjects = new List<GameObject>();
         private static List<GameObject> removeGameObjects = new List<GameObject>();
 
@@ -78,6 +78,8 @@ namespace topDownShooterProject.Classes
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            Level.Update(gameTime);
+
             playerPosition = player.Position;
 
             AddObjects();
@@ -117,7 +119,7 @@ namespace topDownShooterProject.Classes
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
             //GameObjects
             foreach (GameObject obj in gameObjects)

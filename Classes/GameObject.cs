@@ -18,6 +18,8 @@ namespace topDownShooterProject.Classes
         private float timeElapsed;
         private int currentIndex;
 
+        public Vector2 Position { get => position; set => position = value; }
+
         public abstract void LoadContent(ContentManager content);
 
         public abstract void Update(GameTime gameTime);
@@ -48,7 +50,6 @@ namespace topDownShooterProject.Classes
             }
         }
 
-        public Vector2 Position { get => position; set => position = value; }
 
         protected void Animate(GameTime gameTime)
         {

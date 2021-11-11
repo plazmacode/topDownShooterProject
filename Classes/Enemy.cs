@@ -49,8 +49,9 @@ namespace topDownShooterProject.Classes
             sprite = content.Load<Texture2D>("Cherry");
         }
 
-
-    
-
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, Vector2.Zero, 1F, SpriteEffects.None, 0.2f);
+        }
     }
 }
