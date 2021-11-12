@@ -26,7 +26,7 @@ namespace topDownShooterProject.Classes
         public Player()
         {
             health = 100;
-            speed = 1000;
+            speed = 450;
             fps = 10;
             position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
             velocity = Vector2.Zero;
@@ -47,7 +47,8 @@ namespace topDownShooterProject.Classes
         public override void Update(GameTime gameTime)
         {
             MouseState mouseState = Mouse.GetState();
-            Handleinput();
+            Handleinput(mouseState);
+            ScreenLimits();
             Look(mouseState);
             Move(gameTime);
         }
@@ -58,7 +59,7 @@ namespace topDownShooterProject.Classes
             //spriteBacth.Draw(sprite, position, null, Color.White, rotation, Vector2.Zero, 1.0F, SpriteEffects.None, 0);
         }
 
-        private void Handleinput()
+        private void Handleinput(MouseState mouseState)
         {
             velocity = Vector2.Zero;
 
@@ -90,7 +91,9 @@ namespace topDownShooterProject.Classes
             {
                 Shoot();
             }
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (mouseState.LeftButton == ButtonState.Pressed
+                && mouseState.X > 0 && mouseState.X < GameWorld.ScreenSize.X
+                && mouseState.Y > 0 && mouseState.Y < GameWorld.ScreenSize.Y)
             {
                 Shoot();
             }
@@ -111,7 +114,7 @@ namespace topDownShooterProject.Classes
             if (canFire == true && GameWorld.player.ammo > 0)
             {
                 canFire = false;
-                GameWorld.instantiate(new Weapon(bulletSprite, new Vector2(position.X, position.Y)));
+                GameWorld.Instantiate(new Weapon(bulletSprite, new Vector2(position.X, position.Y)));
                 GameWorld.player.ammo--;
                 rifleSound.Play(0.3f, 0f, 0f);
             }
@@ -129,6 +132,29 @@ namespace topDownShooterProject.Classes
 
             rotation = (float)Math.Atan2(Dpos.Y, Dpos.X);
 
+        }
+
+        public void ScreenLimits()
+        {
+            if (GameWorld.EnemiesLeft > 0)
+            {
+                if (position.X < 0)
+                {
+                    position.X = 0;
+                }
+                if (position.Y < 0)
+                {
+                    position.Y = 0;
+                }
+                if (position.X > GameWorld.ScreenSize.X)
+                {
+                    position.X = GameWorld.ScreenSize.X;
+                }
+                if (position.Y > GameWorld.ScreenSize.Y)
+                {
+                    position.Y = GameWorld.ScreenSize.Y;
+                }
+            }
         }
 
         public void Respawn(string place)

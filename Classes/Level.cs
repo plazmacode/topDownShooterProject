@@ -23,6 +23,8 @@ namespace topDownShooterProject.Classes
         public static int[] CurrentLevel { get => currentLevel; set => currentLevel = value; }
         public static int[,] LevelArray { get => levelArray; set => levelArray = value; }
 
+        private static int levelsCompleted;
+        public static int LevelsCompleted { get => levelsCompleted; set => levelsCompleted = value; }
 
         public static void LoadContent(ContentManager content)
         {
@@ -32,6 +34,16 @@ namespace topDownShooterProject.Classes
 
         public static void CreateLevel(int level)
         {
+            GameWorld.EnemiesLeft = (int)(10f * GameWorld.Difficulty);
+            GameWorld.EnemiesInLevel = GameWorld.EnemiesLeft;
+            GameWorld.EnemiesSpawned = 10;
+            foreach (GameObject gameObject in GameWorld.gameObjects)
+            {
+                if (gameObject is Enemy)
+                {
+                    gameObject.GetType().InvokeMember("Respawn", System.Reflection.BindingFlags.InvokeMethod, null, gameObject, null);
+                }
+            }
             switch (level)
             {
                 case 0:
@@ -81,18 +93,21 @@ namespace topDownShooterProject.Classes
 
         private static void Level0()
         {
-            GameWorld.instantiate(new Obstacle(crateSprite, 100, 100, true));
+            for (int i = 0; i < 11; i++)
+            {
+                GameWorld.Instantiate(new Obstacle(crateSprite, 350+50*i, 300, true));
+            }
             for (int i = 0; i < 14; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 300, 50*i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 300, 50*i));
             }
             for (int i = 0; i < 12; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 350+50*i, 650));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 350+50*i, 650));
             }
             for (int i = 0; i < 8; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 900, 200+50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 900, 250+50 * i));
             }
 
         }
@@ -100,171 +115,162 @@ namespace topDownShooterProject.Classes
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
             }
             for (int i = 0; i < 7; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800+50*i, 600));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 800+50*i, 600));
             }
         }
         private static void Level2()
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
             }
             for (int i = 0; i < 7; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
             }
         }
         private static void Level3()
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
             }
             for (int i = 0; i < 7; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
             }
         }
         private static void Level4()
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
-            }
-            for (int i = 0; i < 7; i++)
-            {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
+                for (int j = 0; j < 10; j++)
+                {
+                    GameWorld.Instantiate(new Obstacle(crateSprite, 200 + 50 * j, 200 + 50 * i, true));
+                }
             }
         }
         private static void Level5()
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
             }
             for (int i = 0; i < 7; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
             }
         }
         private static void Level6()
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
             }
             for (int i = 0; i < 7; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
             }
         }
         private static void Level7()
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
             }
             for (int i = 0; i < 7; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
             }
         }
         private static void Level8()
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
             }
             for (int i = 0; i < 7; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
             }
         }
         private static void Level9()
         {
             for (int i = 0; i < 10; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 200, 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 700, 200 + 50 * i));
             }
             for (int i = 0; i < 5; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 1200, 50 * i));
             }
             for (int i = 0; i < 7; i++)
             {
-                GameWorld.instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 800 + 50 * i, 600));
             }
         }
 
@@ -272,34 +278,42 @@ namespace topDownShooterProject.Classes
 
         public static void Update(GameTime gameTime)
         {
-            if (GameWorld.player.Position.X > GameWorld.ScreenSize.X && currentLevel[1] < 2) //Right side
+            playerLevelChange();
+        }
+
+        public static void playerLevelChange()
+        {
+            if (GameWorld.EnemiesLeft <= 0)
             {
-                UnloadLevel();
-                GameWorld.player.Respawn("left");
-                currentLevel[1]++;
-                CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
-                Debug.WriteLine(levelArray[currentLevel[0], currentLevel[1]]);
-            }
-            if (GameWorld.player.Position.X < 0 && currentLevel[1] > 0) //Left side
-            {
-                UnloadLevel();
-                GameWorld.player.Respawn("right");
-                currentLevel[1]--;
-                CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
-            }
-            if (GameWorld.player.Position.Y < 0 && currentLevel[0] > 0) //Top side
-            {
-                UnloadLevel();
-                GameWorld.player.Respawn("bottom");
-                currentLevel[0]--;
-                CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
-            }
-            if (GameWorld.player.Position.Y > GameWorld.ScreenSize.Y && currentLevel[0] < 2) //Bottom side
-            {
-                UnloadLevel();
-                GameWorld.player.Respawn("top");
-                currentLevel[0]++;
-                CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
+                if (GameWorld.player.Position.X > GameWorld.ScreenSize.X && currentLevel[1] < 2) //Right side
+                {
+                    UnloadLevel();
+                    GameWorld.player.Respawn("left");
+                    currentLevel[1]++;
+                    CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
+                    Debug.WriteLine(levelArray[currentLevel[0], currentLevel[1]]);
+                }
+                if (GameWorld.player.Position.X < 0 && currentLevel[1] > 0) //Left side
+                {
+                    UnloadLevel();
+                    GameWorld.player.Respawn("right");
+                    currentLevel[1]--;
+                    CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
+                }
+                if (GameWorld.player.Position.Y < 0 && currentLevel[0] > 0) //Top side
+                {
+                    UnloadLevel();
+                    GameWorld.player.Respawn("bottom");
+                    currentLevel[0]--;
+                    CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
+                }
+                if (GameWorld.player.Position.Y > GameWorld.ScreenSize.Y && currentLevel[0] < 2) //Bottom side
+                {
+                    UnloadLevel();
+                    GameWorld.player.Respawn("top");
+                    currentLevel[0]++;
+                    CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
+                }
             }
         }
 

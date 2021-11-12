@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace topDownShooterProject.Classes
 {
@@ -23,10 +25,22 @@ namespace topDownShooterProject.Classes
 
         public static Player player = new Player();
 
-
+        private static int enemiesLeft;
+        private static int enemiesInLevel;
+        private static int enemiesSpawned;
+        private static int totalEnemiesKilled;
+        private static float difficulty = 1;
 
         public static Vector2 ScreenSize { get => screenSize; set => screenSize = value; }
         public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
+        public static int EnemiesLeft { get => enemiesLeft; set => enemiesLeft = value; }
+        public static int EnemiesInLevel { get => enemiesInLevel; set => enemiesInLevel = value; }
+        public static int EnemiesSpawned { get => enemiesSpawned; set => enemiesSpawned = value; }
+
+
+        public static int TotalEnemiesKilled { get => totalEnemiesKilled; set => totalEnemiesKilled = value; }
+        public static float Difficulty { get => difficulty; set => difficulty = value; }
+
 
 
         public GameWorld()
@@ -50,7 +64,11 @@ namespace topDownShooterProject.Classes
             Level.CreateLevel(0);
 
             gameObjects.Add(player);
-            gameObjects.Add(new Enemy());
+            for (int i = 0; i < 10; i++)
+            {
+                gameObjects.Add(new Enemy());
+            }
+
 
             for (int i = 0; i < 3; i++) //Spawns 5 ammoPickups
             {
@@ -136,8 +154,12 @@ namespace topDownShooterProject.Classes
             }
 
             //UI
-            _spriteBatch.DrawString(text, "Heatlh: " + player.Health.ToString(), new Vector2(100, 20), Color.Red, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
-            _spriteBatch.DrawString(text, "Ammo: " + player.Ammo.ToString(), new Vector2(100, 50), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(text, "Heatlh: " + player.Health.ToString(), new Vector2(20, 20), Color.Red, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(text, "Ammo: " + player.Ammo.ToString(), new Vector2(20, 50), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(text, "Enemies Left: " + enemiesLeft.ToString(), new Vector2(20, 80), Color.Black, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(text, "Total Enemies Killed: " + totalEnemiesKilled.ToString(), new Vector2(20, 110), Color.Black, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(text, "Levels Completed: " + Level.LevelsCompleted.ToString(), new Vector2(20, 140), Color.Black, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+
             _spriteBatch.DrawString(
             text, "Current Level: " + Level.LevelArray[Level.CurrentLevel[0], Level.CurrentLevel[1]].ToString(),
             new Vector2(ScreenSize.X/2-100, 20), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1);
@@ -161,7 +183,7 @@ namespace topDownShooterProject.Classes
             _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
         }
 
-        public static void instantiate(GameObject gameObject)
+        public static void Instantiate(GameObject gameObject)
         {
             newGameObjects.Add(gameObject);
         }
