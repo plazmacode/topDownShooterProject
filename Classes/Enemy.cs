@@ -45,7 +45,7 @@ namespace topDownShooterProject.Classes
         }
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("Cherry");
+            sprite = content.Load<Texture2D>("Skeleton");
         }
 
 
