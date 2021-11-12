@@ -97,6 +97,12 @@
 /processorParam:TextureFormat=Color
 /build:obstacle.png
 
+#begin rifle1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:rifle1.wav
+
 #begin survivor-idle_shotgun_0.png
 /importer:TextureImporter
 /processor:TextureProcessor

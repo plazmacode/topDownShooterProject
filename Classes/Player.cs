@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,10 +13,13 @@ namespace topDownShooterProject.Classes
     public class Player : Character
     {
 
-        Vector2 origin= new Vector2(14,20); 
-        float rotation;
+        private Vector2 origin= new Vector2(14,20); 
+        private float rotation;
 
         private Texture2D bulletSprite;
+        private SoundEffect rifleSound;
+        private int fireCooldown;
+        private bool canFire;
 
         public float Rotation { get => rotation; set => rotation = value; }
 
@@ -26,6 +30,9 @@ namespace topDownShooterProject.Classes
             fps = 10;
             position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
             velocity = Vector2.Zero;
+            canFire = true;
+            fireCooldown = 0;
+            ammo = 50;
         }
 
         public override void LoadContent(ContentManager content)
@@ -33,6 +40,8 @@ namespace topDownShooterProject.Classes
             sprite = content.Load<Texture2D>("survivor-idle_shotgun_0");
 
             bulletSprite = content.Load<Texture2D>("bullet");
+
+            rifleSound = content.Load<SoundEffect>("rifle1");
         }
 
         public override void Update(GameTime gameTime)
@@ -79,7 +88,32 @@ namespace topDownShooterProject.Classes
 
             if (keyState.IsKeyDown(Keys.Space))
             {
+                Shoot();
+            }
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                Shoot();
+            }
+
+            if (!canFire && fireCooldown < 5)
+            {
+                fireCooldown++;
+            }
+            else
+            {
+                canFire = true;
+                fireCooldown = 0;
+            }
+        }
+
+        private void Shoot()
+        {
+            if (canFire == true && GameWorld.player.ammo > 0)
+            {
+                canFire = false;
                 GameWorld.instantiate(new Weapon(bulletSprite, new Vector2(position.X, position.Y)));
+                GameWorld.player.ammo--;
+                rifleSound.Play(0.3f, 0f, 0f);
             }
         }
 
@@ -106,22 +140,22 @@ namespace topDownShooterProject.Classes
             }
             if (place == "left")
             {
-                position = new Vector2(0, position.Y);
+                position = new Vector2(0, GameWorld.ScreenSize.Y / 2);
 
             }
             if (place == "right")
             {
-                position = new Vector2(GameWorld.ScreenSize.X, position.Y);
+                position = new Vector2(GameWorld.ScreenSize.X, GameWorld.ScreenSize.Y / 2);
 
             }
             if (place == "top")
             {
-                position = new Vector2(Position.X, 0);
+                position = new Vector2(GameWorld.ScreenSize.X / 2, 0);
 
             }
             if (place == "bottom")
             {
-                position = new Vector2(Position.X, GameWorld.ScreenSize.Y);
+                position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y);
 
             }
         }

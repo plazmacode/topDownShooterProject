@@ -7,6 +7,7 @@ namespace topDownShooterProject.Classes
 {
     public class GameWorld : Game
     {
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont text;
@@ -19,10 +20,14 @@ namespace topDownShooterProject.Classes
 
         private static Vector2 screenSize;
         private static Vector2 playerPosition;
+
+        public static Player player = new Player();
+
+
+
         public static Vector2 ScreenSize { get => screenSize; set => screenSize = value; }
         public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
 
-        public static Player player = new Player();
 
         public GameWorld()
         {
@@ -131,8 +136,11 @@ namespace topDownShooterProject.Classes
             }
 
             //UI
-            _spriteBatch.DrawString(text, "Heatlh: " + player.Health.ToString(), new Vector2(0, 50), Color.Red);
-            _spriteBatch.DrawString(text, "Ammo: " + player.Ammo.ToString(), new Vector2(0, 80), Color.White);
+            _spriteBatch.DrawString(text, "Heatlh: " + player.Health.ToString(), new Vector2(100, 20), Color.Red, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(text, "Ammo: " + player.Ammo.ToString(), new Vector2(100, 50), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(
+            text, "Current Level: " + Level.LevelArray[Level.CurrentLevel[0], Level.CurrentLevel[1]].ToString(),
+            new Vector2(ScreenSize.X/2-100, 20), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 1);
 
             _spriteBatch.End();
 
