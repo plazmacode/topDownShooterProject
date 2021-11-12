@@ -43,7 +43,7 @@ namespace topDownShooterProject.Classes
 
         public void Respawn()
         {
-            ammoAmount = random.Next(10, 50);
+            ammoAmount = random.Next(5, 15);
 
             int positionX = random.Next(0, (int)GameWorld.ScreenSize.X - sprite.Width);
             int positionY = random.Next(0, (int)GameWorld.ScreenSize.Y - sprite.Width);

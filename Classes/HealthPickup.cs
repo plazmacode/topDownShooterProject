@@ -19,6 +19,7 @@ namespace topDownShooterProject.Classes
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("health");
+            Respawn();
         }
 
         public override void OnCollision(GameObject other)
