@@ -38,11 +38,16 @@ namespace topDownShooterProject.Classes
                 OnCollision(other);
             }
         }
+
         public virtual Rectangle CollisionBox()
         {
             if(this is Player)
             {
                 return new Rectangle((int)position.X-25, (int)position.Y-25, 50, 50);
+            }
+            if (this is Enemy)
+            {
+                return new Rectangle((int)position.X - 25, (int)position.Y - 25, 50, 50);
             }
             else
             { 

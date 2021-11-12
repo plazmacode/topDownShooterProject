@@ -18,6 +18,8 @@ namespace topDownShooterProject.Classes
 
         private Texture2D bulletSprite;
         private SoundEffect rifleSound;
+        private SoundEffectInstance deathSound;
+
         private int fireCooldown;
         private bool canFire;
 
@@ -42,6 +44,8 @@ namespace topDownShooterProject.Classes
             bulletSprite = content.Load<Texture2D>("bullet");
 
             rifleSound = content.Load<SoundEffect>("rifle1");
+            //deathSound = content.Load<SoundEffect>("death").CreateInstance();
+
         }
 
         public override void Update(GameTime gameTime)
@@ -51,6 +55,10 @@ namespace topDownShooterProject.Classes
             ScreenLimits();
             Look(mouseState);
             Move(gameTime);
+            if (health <= 0)
+            {
+                Die();
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -118,6 +126,11 @@ namespace topDownShooterProject.Classes
                 GameWorld.player.ammo--;
                 rifleSound.Play(0.3f, 0f, 0f);
             }
+        }
+
+        private void Die()
+        {
+            //deathSound.Play();
         }
 
         /// <summary>
