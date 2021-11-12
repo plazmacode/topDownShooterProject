@@ -9,8 +9,9 @@ namespace topDownShooterProject.Classes
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private SpriteFont text;
 
-        private List<GameObject> gameObjects = new List<GameObject>();
+        public static List<GameObject> gameObjects = new List<GameObject>();
         private static List<GameObject> newGameObjects = new List<GameObject>();
         private static List<GameObject> removeGameObjects = new List<GameObject>();
 
@@ -21,7 +22,7 @@ namespace topDownShooterProject.Classes
         public static Vector2 ScreenSize { get => screenSize; set => screenSize = value; }
         public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
 
-        Player player = new Player();
+        public static Player player = new Player();
 
         public GameWorld()
         {
@@ -40,15 +41,17 @@ namespace topDownShooterProject.Classes
             newGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
 
+            Level.LoadContent(Content);
+            Level.CreateLevel(0);
+
             gameObjects.Add(player);
             gameObjects.Add(new Enemy());
 
-            gameObjects.Add(new Obstacle());
-            for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
+            for (int i = 0; i < 3; i++) //Spawns 5 ammoPickups
             {
                 gameObjects.Add(new AmmoPickup());
             }
-            for (int i = 0; i < 5; i++) //Spawns 5 ammoPickups
+            for (int i = 0; i < 3; i++) //Spawns 5 ammoPickups
             {
                 gameObjects.Add(new HealthPickup());
             }
@@ -60,7 +63,9 @@ namespace topDownShooterProject.Classes
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Level.LoadContent(Content);
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
+            text = Content.Load<SpriteFont>("text");
 
             foreach (GameObject gameObject in gameObjects)
             {
@@ -72,6 +77,8 @@ namespace topDownShooterProject.Classes
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            Level.Update(gameTime);
 
             playerPosition = player.Position;
 
@@ -96,6 +103,7 @@ namespace topDownShooterProject.Classes
             {
                 gameObjects.Add(gameObject);
             }
+            newGameObjects.Clear();
         }
 
         public void RemoveObjects()
@@ -104,14 +112,16 @@ namespace topDownShooterProject.Classes
             {
                 gameObjects.Remove(gameObject);
             }
+            removeGameObjects.Clear();
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
+            //GameObjects
             foreach (GameObject obj in gameObjects)
             {
                 obj.Draw(_spriteBatch);
@@ -120,6 +130,10 @@ namespace topDownShooterProject.Classes
 #endif
             }
 
+            //UI
+            _spriteBatch.DrawString(text, "Heatlh: " + player.Health.ToString(), new Vector2(0, 50), Color.Red);
+            _spriteBatch.DrawString(text, "Ammo: " + player.Ammo.ToString(), new Vector2(0, 80), Color.White);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -127,7 +141,7 @@ namespace topDownShooterProject.Classes
         }
         private void DrawCollisionBox(GameObject gameObject)
         {
-            Rectangle collisionBox = gameObject.CollisionBox;
+            Rectangle collisionBox = gameObject.CollisionBox();
             Rectangle topLine = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
             Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
             Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);

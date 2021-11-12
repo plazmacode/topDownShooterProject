@@ -23,6 +23,7 @@ namespace topDownShooterProject.Classes
      
         public override void Update(GameTime gameTime)
         {
+            initialPosition = this.position;
             targetPosition = GameWorld.PlayerPosition;
 
             if (targetPosition.X > Position.X )
@@ -48,8 +49,9 @@ namespace topDownShooterProject.Classes
             sprite = content.Load<Texture2D>("Skeleton");
         }
 
-
-    
-
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, Vector2.Zero, 1F, SpriteEffects.None, 0.2f);
+        }
     }
 }
