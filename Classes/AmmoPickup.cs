@@ -41,7 +41,7 @@ namespace topDownShooterProject.Classes
             
         }
 
-        public void Respawn()
+        protected override void Respawn()
         {
             ammoAmount = random.Next(5, 15);
 

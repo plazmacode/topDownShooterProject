@@ -27,15 +27,22 @@ namespace topDownShooterProject.Classes
             this.isDestroyable = isDestroyable;
         }
 
+        public Obstacle(int X, int Y, bool isDestroyable)
+        {
+            this.position.X = X;
+            this.position.Y = Y;
+            this.isDestroyable = isDestroyable;
+        }
         public Obstacle(int X, int Y)
         {
             this.position.X = X;
             this.position.Y = Y;
+            this.isDestroyable = false;
         }
 
         public override void LoadContent(ContentManager content)
         {
-
+            sprite = content.Load<Texture2D>("obstacle");
         }
 
         public override void OnCollision(GameObject other)

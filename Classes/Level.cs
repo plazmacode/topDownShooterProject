@@ -34,16 +34,7 @@ namespace topDownShooterProject.Classes
 
         public static void CreateLevel(int level)
         {
-            GameWorld.EnemiesLeft = (int)(10f * GameWorld.Difficulty);
-            GameWorld.EnemiesInLevel = GameWorld.EnemiesLeft;
-            GameWorld.EnemiesSpawned = 10;
-            foreach (GameObject gameObject in GameWorld.gameObjects)
-            {
-                if (gameObject is Enemy)
-                {
-                    gameObject.GetType().InvokeMember("Respawn", System.Reflection.BindingFlags.InvokeMethod, null, gameObject, null);
-                }
-            }
+            SpawnEnemies();
             switch (level)
             {
                 case 0:
@@ -79,6 +70,22 @@ namespace topDownShooterProject.Classes
             }
         }
 
+        private static void SpawnEnemies()
+        {
+            GameWorld.EnemiesLeft = (int)(10f * GameWorld.Difficulty);
+            GameWorld.EnemiesInLevel = GameWorld.EnemiesLeft;
+            GameWorld.EnemiesSpawned = 10;
+            foreach (GameObject gameObject in GameWorld.gameObjects)
+            {
+                if (gameObject is Enemy)
+                {
+                    gameObject.GetType().InvokeMember("Respawn", System.Reflection.BindingFlags.InvokeMethod, null, gameObject, null);
+                }
+            }
+        }
+        /// <summary>
+        /// Removes some gameObjects from the gameObject list
+        /// </summary>
         private static void UnloadLevel()
         {
             //Remove obstacles from gameObjects to clear the level
@@ -87,6 +94,16 @@ namespace topDownShooterProject.Classes
                 if (gameObject is Obstacle)
                 {
                     GameWorld.Destroy(gameObject);
+                }
+                if (gameObject is Weapon)
+                {
+                    GameWorld.Destroy(gameObject);
+                }
+
+                //Respawn backgroundobjects(change their positions)
+                if (gameObject is BackgroundObject)
+                {
+                    gameObject.GetType().InvokeMember("Respawn", System.Reflection.BindingFlags.InvokeMethod, null, gameObject, null);
                 }
             }
         }
@@ -103,13 +120,12 @@ namespace topDownShooterProject.Classes
             }
             for (int i = 0; i < 12; i++)
             {
-                GameWorld.Instantiate(new Obstacle(obstacleSprite, 350+50*i, 650));
+                GameWorld.Instantiate(new Obstacle(obstacleSprite, 350 + 50*i, 650));
             }
             for (int i = 0; i < 8; i++)
             {
                 GameWorld.Instantiate(new Obstacle(obstacleSprite, 900, 250+50 * i));
             }
-
         }
         private static void Level1()
         {
@@ -274,14 +290,16 @@ namespace topDownShooterProject.Classes
             }
         }
 
-
-
         public static void Update(GameTime gameTime)
         {
             playerLevelChange();
         }
 
-        public static void playerLevelChange()
+        /// <summary>
+        /// Check if all enemies are killed
+        /// Afterwards, check if the player is moving to another level in the levelArray
+        /// </summary>
+        private static void playerLevelChange()
         {
             if (GameWorld.EnemiesLeft <= 0)
             {

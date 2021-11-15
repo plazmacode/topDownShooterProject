@@ -40,7 +40,7 @@ namespace topDownShooterProject.Classes
         {
             
         }
-        public void Respawn()
+        protected override void Respawn()
         {
             healAmount = random.Next(10, 50);
 

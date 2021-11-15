@@ -49,6 +49,11 @@ namespace topDownShooterProject.Classes
             {
                 return new Rectangle((int)position.X - 25, (int)position.Y - 25, 50, 50);
             }
+            if (this is BackgroundObject)
+            {
+                //No collisionBox
+                return new Rectangle(20,20, 0, 0);
+            }
             else
             { 
                 return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);

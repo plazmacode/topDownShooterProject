@@ -7,28 +7,40 @@ using System.Text;
 
 namespace topDownShooterProject.Classes
 {
-    class BackgroundObject : GameObject
+    public class BackgroundObject : GameObject
     {
-        public BackgroundObject(Texture2D sprite, int X, int Y)
+        private Random random;
+
+        public BackgroundObject()
         {
-            this.sprite = sprite;
-            position.X = X;
-            position.Y = Y;
+            random = new Random();
         }
 
         public override void LoadContent(ContentManager content)
         {
             sprites = new Texture2D[4];
 
-            sprites[0] = content.Load<Texture2D>("");
+            for (int i = 0; i < 4; i++)
+            {
+                sprites[i] = content.Load<Texture2D>("background" + i);
+            }
+
 
             sprite = sprites[0];
 
+            Respawn();
         }
 
         public override void OnCollision(GameObject other)
         {
-            
+            if (other is Obstacle)
+            {
+                Respawn();
+            }
+            if (other is BackgroundObject)
+            {
+                Respawn();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -37,7 +49,17 @@ namespace topDownShooterProject.Classes
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, null, Color.White, 0, Vector2.Zero, 1F, SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, Vector2.Zero, 0.5F, SpriteEffects.None, 0.1f);
+        }
+
+        public void Respawn()
+        {
+            sprite = sprites[random.Next(0, 4)];
+
+            int positionX = random.Next(0, (int)GameWorld.ScreenSize.X - sprite.Width);
+            int positionY = random.Next(0, (int)GameWorld.ScreenSize.Y - sprite.Width);
+
+            position = new Vector2(positionX, positionY);
         }
     }
 }

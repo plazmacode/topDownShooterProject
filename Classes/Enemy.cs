@@ -34,7 +34,7 @@ namespace topDownShooterProject.Classes
             this.velocity = -Vector2.Subtract(this.position, GameWorld.player.Position);
             this.velocity.Normalize();
             initialPosition = this.position;
-            targetPosition = GameWorld.PlayerPosition;
+            targetPosition = GameWorld.player.Position;
             if (this.position.X > -100)
             {
                 Move(gameTime);

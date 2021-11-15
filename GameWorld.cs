@@ -19,9 +19,9 @@ namespace topDownShooterProject.Classes
         private static List<GameObject> removeGameObjects = new List<GameObject>();
 
         private Texture2D collisionTexture;
+        private Texture2D backgroundImage;
 
         private static Vector2 screenSize;
-        private static Vector2 playerPosition;
 
         public static Player player = new Player();
 
@@ -32,7 +32,6 @@ namespace topDownShooterProject.Classes
         private static float difficulty = 1;
 
         public static Vector2 ScreenSize { get => screenSize; set => screenSize = value; }
-        public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
         public static int EnemiesLeft { get => enemiesLeft; set => enemiesLeft = value; }
         public static int EnemiesInLevel { get => enemiesInLevel; set => enemiesInLevel = value; }
         public static int EnemiesSpawned { get => enemiesSpawned; set => enemiesSpawned = value; }
@@ -60,13 +59,15 @@ namespace topDownShooterProject.Classes
             newGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
 
-            Level.LoadContent(Content);
-            Level.CreateLevel(0);
-
             gameObjects.Add(player);
             for (int i = 0; i < 10; i++)
             {
                 gameObjects.Add(new Enemy());
+            }
+            //Create backgroundObjects
+            for (int i = 0; i < 50; i++)
+            {
+                gameObjects.Add(new BackgroundObject());
             }
 
 
@@ -86,14 +87,17 @@ namespace topDownShooterProject.Classes
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Level.LoadContent(Content);
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
+            backgroundImage = Content.Load<Texture2D>("backgroundImage");
             text = Content.Load<SpriteFont>("text");
 
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
             }
+            Level.LoadContent(Content);
+            Level.CreateLevel(0);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -102,8 +106,6 @@ namespace topDownShooterProject.Classes
                 Exit();
 
             Level.Update(gameTime);
-
-            playerPosition = player.Position;
 
             AddObjects();
             RemoveObjects();
@@ -143,6 +145,8 @@ namespace topDownShooterProject.Classes
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack);
+
+            _spriteBatch.Draw(backgroundImage, Vector2.Zero, Color.White);
 
             //GameObjects
             foreach (GameObject obj in gameObjects)
