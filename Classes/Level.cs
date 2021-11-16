@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace topDownShooterProject.Classes
 {
-    static class Level
+    public static class Level
     {
         private static Texture2D obstacleSprite;
         private static Texture2D crateSprite;
@@ -309,7 +309,6 @@ namespace topDownShooterProject.Classes
                     GameWorld.player.Respawn("left");
                     currentLevel[1]++;
                     CreateLevel(levelArray[currentLevel[0], currentLevel[1]]);
-                    Debug.WriteLine(levelArray[currentLevel[0], currentLevel[1]]);
                 }
                 if (GameWorld.player.Position.X < 0 && currentLevel[1] > 0) //Left side
                 {

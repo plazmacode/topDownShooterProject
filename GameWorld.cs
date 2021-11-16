@@ -20,6 +20,7 @@ namespace topDownShooterProject.Classes
 
         private Texture2D collisionTexture;
         private Texture2D backgroundImage;
+        private Texture2D tutorialImage;
 
         private static Vector2 screenSize;
 
@@ -89,6 +90,7 @@ namespace topDownShooterProject.Classes
 
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
             backgroundImage = Content.Load<Texture2D>("backgroundImage");
+            tutorialImage = Content.Load<Texture2D>("tutorialImage");
             text = Content.Load<SpriteFont>("text");
 
             foreach (GameObject gameObject in gameObjects)
@@ -104,6 +106,10 @@ namespace topDownShooterProject.Classes
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (!player.IsAlive)
+            {
+                Environment.Exit(0);
+            }
 
             Level.Update(gameTime);
 
@@ -145,8 +151,16 @@ namespace topDownShooterProject.Classes
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            //Check if level is 
+            if (Level.LevelArray[Level.CurrentLevel[0], Level.CurrentLevel[1]] == 0)
+            {
+                _spriteBatch.Draw(tutorialImage, Vector2.Zero, Color.White);
 
-            _spriteBatch.Draw(backgroundImage, Vector2.Zero, Color.White);
+            }
+            else
+            {
+                _spriteBatch.Draw(backgroundImage, Vector2.Zero, Color.White);
+            }
 
             //GameObjects
             foreach (GameObject obj in gameObjects)

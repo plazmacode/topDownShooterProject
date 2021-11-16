@@ -20,6 +20,8 @@ namespace topDownShooterProject.Classes
 
         public Vector2 Position { get => position; set => position = value; }
 
+        public float Speed { get => speed; set => speed = value; }
+
         public abstract void LoadContent(ContentManager content);
 
         public abstract void Update(GameTime gameTime);

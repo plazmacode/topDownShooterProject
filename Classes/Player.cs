@@ -18,12 +18,14 @@ namespace topDownShooterProject.Classes
 
         private Texture2D bulletSprite;
         private SoundEffect rifleSound;
-        private SoundEffectInstance deathSound;
 
         private int fireCooldown;
         private bool canFire;
+        private bool isAlive;
 
         public float Rotation { get => rotation; set => rotation = value; }
+
+        public bool IsAlive { get => isAlive; set => isAlive = value; }
 
         public Player()
         {
@@ -33,6 +35,7 @@ namespace topDownShooterProject.Classes
             position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
             velocity = Vector2.Zero;
             canFire = true;
+            isAlive = true;
             fireCooldown = 0;
             ammo = 50;
         }
@@ -44,7 +47,6 @@ namespace topDownShooterProject.Classes
             bulletSprite = content.Load<Texture2D>("bullet");
 
             rifleSound = content.Load<SoundEffect>("rifle1");
-            //deathSound = content.Load<SoundEffect>("death").CreateInstance();
 
         }
 
@@ -130,7 +132,7 @@ namespace topDownShooterProject.Classes
 
         private void Die()
         {
-            //deathSound.Play();
+            this.isAlive = false;
         }
 
         /// <summary>

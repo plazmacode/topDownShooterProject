@@ -65,16 +65,20 @@ namespace topDownShooterProject.Classes
 
         public override void OnCollision(GameObject other)
         {
-            if (other is Obstacle) //collision code 2.0
+            if (other is Player)
             {
                 this.position = initialPosition;
             }
 
+            if (other is Obstacle) //collision code 2.0
+            {
+                this.position = initialPosition;
+            }
+            //If enemies collide with the player, the player takes damage
             if (other is Player && this.canAttack == true)
             {
                 GameWorld.player.Health -= this.damage;
                 canAttack = false;
-                Debug.WriteLine(canAttack);
             }
         }
 
@@ -87,6 +91,14 @@ namespace topDownShooterProject.Classes
         public void Respawn()
         {
             random = new Random();
+            
+            //Makes enemies faster
+            //Make sure that enemies can't be too fast
+            if (this.speed < 1000)
+            {
+                this.speed = 150 * GameWorld.Difficulty;
+            }
+
 
             //Create an array of the 4 sides of the screen
             Vector2[] spawns = new Vector2[4];

@@ -23,8 +23,6 @@ namespace topDownShooterProject.Classes
 
         public override void OnCollision(GameObject other)
         {
-            //TODO: Add more precise collision detection 
-
             if (other is Obstacle) //collision code 2.0
             {
                 this.position = initialPosition;
