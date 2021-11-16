@@ -12,18 +12,20 @@ namespace topDownShooterProject.Classes
     {
         private static Texture2D obstacleSprite;
         private static Texture2D crateSprite;
+        private static int levelsCompleted; 
         private static int[,] levelArray = new int[3, 3]
         {
             { 7, 3, 6 },
             { 2, 0, 1 },
             { 8, 4, 5 }
         };
+        
+
         private static int[] currentLevel = new int[2] { 1, 1 };
 
         public static int[] CurrentLevel { get => currentLevel; set => currentLevel = value; }
         public static int[,] LevelArray { get => levelArray; set => levelArray = value; }
 
-        private static int levelsCompleted;
         public static int LevelsCompleted { get => levelsCompleted; set => levelsCompleted = value; }
 
         public static void LoadContent(ContentManager content)
