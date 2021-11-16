@@ -74,8 +74,10 @@ namespace topDownShooterProject.Classes
                 {
                     other.Position = new Vector2(-500, -500);
                 }
+
                 GameWorld.EnemiesLeft--;
                 GameWorld.TotalEnemiesKilled++;
+
                 if (GameWorld.EnemiesLeft <= 0)
                 {
                     GameWorld.Difficulty = GameWorld.Difficulty * 1.25f;
