@@ -25,8 +25,6 @@ namespace topDownShooterProject.Classes
             this.rotation = GameWorld.player.Rotation;
         }
 
-
-
         public override void LoadContent(ContentManager content)
         {
 
