@@ -335,10 +335,5 @@ namespace topDownShooterProject.Classes
                 }
             }
         }
-
-        public static void OnCollision(GameObject other)
-        {
-
-        }
     }
 }

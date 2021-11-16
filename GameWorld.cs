@@ -151,7 +151,7 @@ namespace topDownShooterProject.Classes
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack);
-            //Check if level is 
+            //Check if level is tutorial level
             if (Level.LevelArray[Level.CurrentLevel[0], Level.CurrentLevel[1]] == 0)
             {
                 _spriteBatch.Draw(tutorialImage, Vector2.Zero, Color.White);

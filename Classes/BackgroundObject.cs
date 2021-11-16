@@ -52,7 +52,7 @@ namespace topDownShooterProject.Classes
             spriteBatch.Draw(sprite, position, null, Color.White, 0, Vector2.Zero, 0.5F, SpriteEffects.None, 0.1f);
         }
 
-        private void Respawn()
+        public void Respawn()
         {
             sprite = sprites[random.Next(0, 4)];
 
