@@ -36,8 +36,6 @@ namespace topDownShooterProject.Classes
             }
         }
 
-        
-
         public override void Update(GameTime gameTime)
         {
             
