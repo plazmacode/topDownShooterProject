@@ -294,14 +294,14 @@ namespace topDownShooterProject.Classes
 
         public static void Update(GameTime gameTime)
         {
-            playerLevelChange();
+            PlayerLevelChange();
         }
 
         /// <summary>
         /// Check if all enemies are killed
         /// Afterwards, check if the player is moving to another level in the levelArray
         /// </summary>
-        private static void playerLevelChange()
+        private static void PlayerLevelChange()
         {
             if (GameWorld.EnemiesLeft <= 0)
             {
