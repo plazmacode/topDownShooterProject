@@ -141,7 +141,6 @@ namespace topDownShooterProject.Classes
         /// <param name="mouseState"></param>
         private void Look(MouseState mouseState)
         {
-
             Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
             Vector2 Dpos = position - mousePosition;
 

@@ -15,8 +15,6 @@ namespace topDownShooterProject.Classes
         protected float fps;
         protected Vector2 velocity;
         protected float speed;
-        private float timeElapsed;
-        private int currentIndex;
 
         public Vector2 Position { get => position; set => position = value; }
 
@@ -59,22 +57,6 @@ namespace topDownShooterProject.Classes
             else
             { 
                 return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
-            }
-        }
-
-
-        protected void Animate(GameTime gameTime)
-        {
-            timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            currentIndex = (int)(timeElapsed * fps);
-
-            sprite = sprites[currentIndex];
-
-            if (currentIndex >= sprites.Length - 1)
-            {
-                timeElapsed = 0;
-                currentIndex = 0;
             }
         }
     }

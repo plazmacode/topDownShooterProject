@@ -22,7 +22,6 @@ namespace topDownShooterProject.Classes
         public Enemy()
             {
             speed = 150;
-            fps = 10;
             damage = 3;
             canAttack = true;
             attackCooldown = 0;
