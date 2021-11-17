@@ -91,6 +91,23 @@ namespace topDownShooterProject.Classes
             {
                 velocity += new Vector2(1, 0);
             }
+            //cheat to kill all enemies
+            if (keyState.IsKeyDown(Keys.K))
+            {
+                if (GameWorld.EnemiesLeft > 0)
+                {
+                    GameWorld.TotalEnemiesKilled += GameWorld.EnemiesInLevel;
+                }
+                GameWorld.EnemiesLeft = 0;
+                foreach (GameObject gameObject in GameWorld.gameObjects)
+                {
+                    if (gameObject is Enemy)
+                    {
+                        gameObject.Position = new Vector2(-500, -500);
+                    }
+                }
+
+            }
 
             if (velocity != Vector2.Zero)
             {
