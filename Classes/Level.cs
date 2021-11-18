@@ -18,8 +18,7 @@ namespace topDownShooterProject.Classes
             { 7, 3, 6 },
             { 2, 0, 1 },
             { 8, 4, 5 }
-        };
-        
+        }; 
 
         private static int[] currentLevel = new int[2] { 1, 1 };
 
