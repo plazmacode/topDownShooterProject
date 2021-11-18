@@ -18,8 +18,7 @@ namespace topDownShooterProject.Classes
             { 7, 3, 6 },
             { 2, 0, 1 },
             { 8, 4, 5 }
-        };
-        
+        }; 
 
         private static int[] currentLevel = new int[2] { 1, 1 };
 
@@ -71,7 +70,9 @@ namespace topDownShooterProject.Classes
                     break;
             }
         }
-
+        /// <summary>
+        /// Spawns enemies and updates related variables: EnemiesLeft, EnemiesInLevel, EnemiesSpawned
+        /// </summary>
         private static void SpawnEnemies()
         {
             GameWorld.EnemiesLeft = (int)(10f * GameWorld.Difficulty);
