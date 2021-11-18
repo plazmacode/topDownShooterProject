@@ -149,7 +149,7 @@ namespace topDownShooterProject.Classes
 
         }
 
-        public void ScreenLimits()
+        private void ScreenLimits()
         {
             if (GameWorld.EnemiesLeft > 0)
             {

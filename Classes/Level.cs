@@ -69,7 +69,9 @@ namespace topDownShooterProject.Classes
                     break;
             }
         }
-
+        /// <summary>
+        /// Spawns enemies and updates related variables: EnemiesLeft, EnemiesInLevel, EnemiesSpawned
+        /// </summary>
         private static void SpawnEnemies()
         {
             GameWorld.EnemiesLeft = (int)(10f * GameWorld.Difficulty);
