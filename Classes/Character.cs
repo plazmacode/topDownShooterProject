@@ -6,7 +6,7 @@ using System.Text;
 
 namespace topDownShooterProject.Classes
 {
-    public class Character : GameObject, IMoveable
+    public class Character : GameObject
     {
         protected Vector2 initialPosition; //Get position of character, before it has moved
         protected int health;
