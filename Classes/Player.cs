@@ -31,7 +31,6 @@ namespace topDownShooterProject.Classes
         {
             health = 100;
             speed = 450;
-            fps = 10;
             position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
             velocity = Vector2.Zero;
             canFire = true;
